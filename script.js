@@ -2,7 +2,8 @@
 // it will trigger when the DOM is loaded
 // aka upon visiting the wbpage
 addEventListener("DOMContentLoaded", async function(){
-    const response = await fetch("http://localhost:3000/api/songs")
+    //const response = await fetch("http://localhost:3000/api/songs")
+    const response = await fetch("https://dwrigley1.github.io/backend/")
     const songs = await response.json()
 
     let html ="" // blank screen
