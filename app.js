@@ -26,6 +26,7 @@ app.listen(3000,function(){
 // GET or a regular request when someone goes to http://localhost:3000/hello (3000 isn't neccessary, it is the default). 
 // When using a function and a route, we almost always have a parameter or handle a response and request
 
+
 app.get("/hello",function(req,res){
     res.send("<h1>Hello Express</h1>")
 })
