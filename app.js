@@ -51,5 +51,5 @@ app.use("/api",router) // this line instructs the script to use the /api URL bef
 // below was added for Glitch
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
+  console.log(` Server running on port ${PORT}`);
 });
