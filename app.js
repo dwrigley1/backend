@@ -83,8 +83,8 @@ router.get("/songs", (req, res) => {
 app.use("/api",router) // this line instructs the script to use the /api URL before using one wihtout it
 
 // below was added for Glitch
-//const PORT = process.env.PORT || 3000;
-//app.listen(PORT, () => {
-  //console.log(` Server running on port ${PORT}`);
-//});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(` Server running on port ${PORT}`);
+});
 
