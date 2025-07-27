@@ -60,6 +60,16 @@ router.put("/songs/:id", async (req, res) => {
   }
 });
 
+router.delete("/songs/:id", async(req,res) =>{
+  // method or function in Mongoose/Mongo to delete a single instance of a song or object
+  try{
+    Song.deleteOne({_id: req.params.id})
+  }
+  catch(err){
+    res.status(400).send(err)
+  }
+})
+
 
 // the slash is in the URL
 
@@ -83,8 +93,8 @@ router.get("/songs", (req, res) => {
 app.use("/api",router) // this line instructs the script to use the /api URL before using one wihtout it
 
 // below was added for Glitch
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(` Server running on port ${PORT}`);
-});
+//const PORT = process.env.PORT || 3000;
+//app.listen(PORT, () => {
+  //console.log(` Server running on port ${PORT}`);
+//});
 
