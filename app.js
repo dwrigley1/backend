@@ -60,15 +60,42 @@ router.put("/songs/:id", async (req, res) => {
   }
 });
 
-router.delete("/songs/:id", async(req,res) =>{
-  // method or function in Mongoose/Mongo to delete a single instance of a song or object
-  try{
-    Song.deleteOne({_id: req.params.id})
+router.delete("/songs/:id", async (req, res) => {
+  console.log("DELETE request for ID:", req.params.id);
+
+  try {
+    const result = await Song.deleteOne({ _id: req.params.id });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: "Song not found" });
+    }
+
+    res.status(200).json({ message: "Song deleted", id: req.params.id });
+  } catch (err) {
+    console.error("Delete error:", err);
+    res.status(500).json({ message: "Failed to delete song", error: err });
   }
-  catch(err){
-    res.status(400).send(err)
+});
+
+
+
+/** 
+router.delete("/songs/:id", async (req, res) => {
+  try {
+    const result = await Song.deleteOne({ _id: req.params.id });
+    
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: "Song not found" });
+    }
+
+    res.status(200).json({ message: "Song deleted", id: req.params.id });
+  } catch (err) {
+    console.error("Delete error:", err);
+    res.status(500).json({ message: "Failed to delete song", error: err });
   }
-})
+});
+**/
+
 
 
 // the slash is in the URL
