@@ -1,4 +1,4 @@
-const db = require("../db")
+const db = require("./db")
 
 const Song = db.model("Song",{
     title:{type:String, required:true},

@@ -1,13 +1,37 @@
 // setup... this is similar to when we use our default tags in HTML
 
+require("dotenv").config();
 const express = require("express")
 var cors = require('cors') // have to use to host frontend & backend on same device
 const bodyParser = require('body-parser')// new code added for MongoDB integration //
-const Song = require("./models/songs")
+//const jwt = require('jwt-simple')
+//const User = require("./user")
+const Song = require("./songs")
 const app = express() //activate or tells this app variable to be an express server
 app.use(cors()) // allows to use cors system to connect backend & frontend
 app.use(bodyParser.json())
 const router = express.Router()
+const secret = "supersecret"
+
+/**creating a new user
+router.post("/user", async(req,res) => {
+  if(!req.body.username || !req.body.password){
+    res.status(400).json({error: "Missing username or password"})
+  }
+  const newUser = await new User({
+    username: req.body.username,
+    password: req.body.password,
+    status: req.body.status
+  })
+  try{
+    await newUser.save()
+    res.status(201) // user created
+  }
+  catch (err){
+    console.log(err)
+    res.status(400).send(err)
+  }
+}) **/
 
 // grab all the songs in a database
 router.get("/songs", async(req,res) =>{
@@ -76,30 +100,6 @@ router.delete("/songs/:id", async (req, res) => {
     res.status(500).json({ message: "Failed to delete song", error: err });
   }
 });
-
-
-
-/** 
-router.delete("/songs/:id", async (req, res) => {
-  try {
-    const result = await Song.deleteOne({ _id: req.params.id });
-    
-    if (result.deletedCount === 0) {
-      return res.status(404).json({ message: "Song not found" });
-    }
-
-    res.status(200).json({ message: "Song deleted", id: req.params.id });
-  } catch (err) {
-    console.error("Delete error:", err);
-    res.status(500).json({ message: "Failed to delete song", error: err });
-  }
-});
-**/
-
-
-
-// the slash is in the URL
-
 
 app.listen(3000,function(){
     console.log("Listening on port 3000")
